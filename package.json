@@ -1,0 +1,23 @@
+{
+  "name": "cybernexus-platform",
+  "version": "1.0.0",
+  "description": "CyberNexus — Full-Stack Web Application Security & Defense Platform",
+  "scripts": {
+    "server": "npm --prefix server start",
+    "server:dev": "npm --prefix server run dev",
+    "client": "npm --prefix client run dev",
+    "test": "npm --prefix server test",
+    "audit": "npm --prefix server run audit"
+  },
+  "keywords": [
+    "cybersecurity",
+    "appsec",
+    "react",
+    "express",
+    "mongodb",
+    "helmet",
+    "bcrypt"
+  ],
+  "author": "CyberNexus Team",
+  "license": "ISC"
+}
