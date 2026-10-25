@@ -2,7 +2,7 @@
  * Centralized API Client with Cookie and Bearer support
  */
 
-const BASE_URL = '/api';
+const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 export const apiClient = async (endpoint, options = {}) => {
   const token = localStorage.getItem('cybernexus_token');
