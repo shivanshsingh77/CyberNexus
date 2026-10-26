@@ -70,7 +70,7 @@ export const Navbar = ({ activeTab, setMobileOpen, setActiveTab }) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
         <button
           onClick={() => setMobileOpen((prev) => !prev)}
-          className="btn-secondary"
+          className="btn-secondary mobile-menu-button"
           style={{
             padding: '0.4rem',
             display: 'inline-flex',

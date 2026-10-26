@@ -79,24 +79,22 @@ export const Sidebar = ({ activeTab, setActiveTab, mobileOpen, setMobileOpen }) 
           style={{
             position: 'fixed',
             inset: 0,
-            background: 'rgba(15, 23, 42, 0.5)',
+            background: 'rgba(15, 23, 42, 0.35)',
             zIndex: 40,
-            backdropFilter: 'blur(2px)',
           }}
         />
       )}
 
       <aside
+        className={`app-sidebar ${mobileOpen ? 'mobile-open' : ''}`}
         style={{
           width: '270px',
           flexShrink: 0,
+          backgroundColor: '#0f172a',
+          borderRight: '1px solid #1e293b',
+          display: 'flex',
+          flexDirection: 'column',
           zIndex: 50,
-          position: 'fixed',
-          top: 0,
-          left: mobileOpen ? 0 : '-280px',
-          height: '100dvh',
-          maxWidth: '85vw',
-          transition: 'left 0.25s ease-in-out',
         }}
       >
         {/* Brand Header */}

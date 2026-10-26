@@ -473,3 +473,34 @@ body {
     max-width: 100%;
   }
 }
+
+/* Hide hamburger on desktop */
+@media (min-width: 769px) {
+  .mobile-menu-button {
+    display: none !important;
+  }
+}
+
+/* Sidebar desktop and mobile behavior */
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    max-width: 85vw;
+    transform: translateX(-105%);
+    transition: transform 0.25s ease-in-out;
+  }
+
+  .app-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+}
