@@ -89,15 +89,14 @@ export const Sidebar = ({ activeTab, setActiveTab, mobileOpen, setMobileOpen }) 
       <aside
         style={{
           width: '270px',
-          backgroundColor: '#0f172a', /* Slate 900 */
-          borderRight: '1px solid #1e293b',
-          display: 'flex',
-          flexDirection: 'column',
           flexShrink: 0,
           zIndex: 50,
-          position: 'sticky',
+          position: 'fixed',
           top: 0,
-          height: '100vh',
+          left: mobileOpen ? 0 : '-280px',
+          height: '100dvh',
+          maxWidth: '85vw',
+          transition: 'left 0.25s ease-in-out',
         }}
       >
         {/* Brand Header */}

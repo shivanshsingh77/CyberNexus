@@ -59,7 +59,8 @@ export const Navbar = ({ activeTab, setMobileOpen, setActiveTab }) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '0 2rem',
+        padding: '0 0.75rem',
+        gap: '0.5rem',
         position: 'sticky',
         top: 0,
         zIndex: 30,
@@ -84,88 +85,107 @@ export const Navbar = ({ activeTab, setMobileOpen, setActiveTab }) => {
           <Menu size={18} />
         </button>
 
-        <div>
-          <div style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--text-main)' }}>
+        <div style={{ minWidth: 0, overflow: 'hidden' }}>
+          <div
+            style={{
+              fontSize: '0.8rem',
+              fontWeight: 700,
+              color: 'var(--text-main)',
+              minWidth: 0,
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              textOverflow: 'ellipsis',
+            }}
+          >
             {getPageTitle()}
           </div>
-          <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)' }}>
+
+          <div
+            style={{
+              fontSize: '0.72rem',
+              color: 'var(--text-dim)',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
             Web Application Security Engineering Console
           </div>
         </div>
-      </div>
 
-      {/* Status Badges */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            padding: '0.3rem 0.65rem',
-            background: 'var(--bg-muted)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '6px',
-            fontSize: '0.74rem',
-          }}
-        >
-          <Database size={13} color="var(--accent-primary)" />
-          <span style={{ color: 'var(--text-muted)' }}>MongoDB:</span>
-          <span
-            style={{
-              fontWeight: 600,
-              color: healthStatus === 'healthy' ? 'var(--emerald-success)' : 'var(--rose-danger)',
-            }}
-          >
-            {healthStatus === 'healthy' ? 'Connected' : 'Offline'}
-          </span>
-        </div>
-
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            padding: '0.3rem 0.65rem',
-            background: 'var(--bg-muted)',
-            border: '1px solid var(--border-color)',
-            borderRadius: '6px',
-            fontSize: '0.74rem',
-          }}
-        >
-          <Lock size={13} color="var(--accent-teal)" />
-          <span style={{ color: 'var(--text-muted)' }}>Session:</span>
-          <span style={{ fontWeight: 600, color: 'var(--accent-teal)' }}>HTTP-Only</span>
-        </div>
-
-        {isAuthenticated ? (
-          <button
-            onClick={() => setActiveTab('profile')}
+        {/* Status Badges */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '0.45rem',
-              padding: '0.32rem 0.75rem',
+              padding: '0.3rem 0.65rem',
+              background: 'var(--bg-muted)',
+              border: '1px solid var(--border-color)',
               borderRadius: '6px',
-              background: '#f0f9ff',
-              border: '1px solid #bae6fd',
-              color: 'var(--accent-primary)',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              cursor: 'pointer',
+              fontSize: '0.74rem',
             }}
           >
-            <UserCircle size={15} />
-            <span>{user?.username}</span>
-          </button>
-        ) : (
-          <button
-            onClick={() => setActiveTab('login')}
-            className="btn btn-primary"
-            style={{ padding: '0.35rem 0.85rem', fontSize: '0.78rem' }}
+            <Database size={13} color="var(--accent-primary)" />
+            <span style={{ color: 'var(--text-muted)' }}>MongoDB:</span>
+            <span
+              style={{
+                fontWeight: 600,
+                color: healthStatus === 'healthy' ? 'var(--emerald-success)' : 'var(--rose-danger)',
+              }}
+            >
+              {healthStatus === 'healthy' ? 'Connected' : 'Offline'}
+            </span>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              padding: '0.3rem 0.65rem',
+              background: 'var(--bg-muted)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '6px',
+              fontSize: '0.74rem',
+            }}
           >
-            Sign In
-          </button>
-        )}
+            <Lock size={13} color="var(--accent-teal)" />
+            <span style={{ color: 'var(--text-muted)' }}>Session:</span>
+            <span style={{ fontWeight: 600, color: 'var(--accent-teal)' }}>HTTP-Only</span>
+          </div>
+
+          {isAuthenticated ? (
+            <button
+              onClick={() => setActiveTab('profile')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.45rem',
+                padding: '0.32rem 0.75rem',
+                borderRadius: '6px',
+                background: '#f0f9ff',
+                border: '1px solid #bae6fd',
+                color: 'var(--accent-primary)',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
+            >
+              <UserCircle size={15} />
+              <span>{user?.username}</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => setActiveTab('login')}
+              className="btn btn-primary"
+              style={{ padding: '0.35rem 0.85rem', fontSize: '0.78rem' }}
+            >
+              Sign In
+            </button>
+          )}
+                </div>
       </div>
     </header>
   );
