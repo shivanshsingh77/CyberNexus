@@ -167,22 +167,24 @@ export const runSecurityAudit = async (req, res) => {
     body: JSON.stringify({ username: 'x', email: 'not-an-email', password: '123' }),
   });
 
+  
   let validationStatus = 'FAIL';
   let validationActual = '';
 
-  
-if (validationProbe.ok && validationProbe.status === 400) {
-  validationStatus = 'PASS';
-  validationActual =
-    'Real probe verified: POST /api/auth/register with invalid data returned HTTP 400 Bad Request with field rejection.';
-} else if (validationProbe.ok && validationProbe.status === 429) {
-  validationStatus = 'WARNING';
-  validationActual =
-    'Validation probe was rate-limited (HTTP 429). Input validation could not be verified during this run; rate limiting remains active.';
-} else if (validationProbe.ok) {
-  validationActual = `Unexpected status ${validationProbe.status} received when sending invalid input payload.`;
-} else {
-
+  if (validationProbe.ok && validationProbe.status === 400) {
+    validationStatus = 'PASS';
+    validationActual =
+      'Real probe verified: POST /api/auth/register with invalid data returned HTTP 400 Bad Request with field rejection.';
+  } else if (validationProbe.ok && validationProbe.status === 429) {
+    validationStatus = 'WARNING';
+    validationActual =
+      'Validation probe was rate-limited (HTTP 429). Input validation could not be verified during this run; rate limiting remains active.';
+  } else if (validationProbe.ok) {
+    validationActual = `Unexpected status ${validationProbe.status} received when sending invalid input payload.`;
+  } else {
+    validationStatus = 'WARNING';
+    validationActual = `Validation probe could not connect: ${validationProbe.error}`;
+  }
 
   auditResults.push({
     id: 'SEC-005',
@@ -194,6 +196,7 @@ if (validationProbe.ok && validationProbe.status === 400) {
     fix: validationStatus === 'PASS' ? 'None. Validation rules active.' : 'Validate all incoming request bodies on the server before database ingestion.',
     severity: 'High',
   });
+
 
   // --- Test 6: Database Connection State ---
   const dbState = mongoose.connection.readyState;
