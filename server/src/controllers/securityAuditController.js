@@ -170,15 +170,19 @@ export const runSecurityAudit = async (req, res) => {
   let validationStatus = 'FAIL';
   let validationActual = '';
 
-  if (validationProbe.ok && validationProbe.status === 400) {
-    validationStatus = 'PASS';
-    validationActual = 'Real probe verified: POST /api/auth/register with invalid data returned HTTP 400 Bad Request with field rejection.';
-  } else if (validationProbe.ok) {
-    validationActual = `Unexpected status ${validationProbe.status} received when sending invalid input payload.`;
-  } else {
-    validationStatus = 'WARNING';
-    validationActual = `Validation probe could not connect: ${validationProbe.error}`;
-  }
+  
+if (validationProbe.ok && validationProbe.status === 400) {
+  validationStatus = 'PASS';
+  validationActual =
+    'Real probe verified: POST /api/auth/register with invalid data returned HTTP 400 Bad Request with field rejection.';
+} else if (validationProbe.ok && validationProbe.status === 429) {
+  validationStatus = 'WARNING';
+  validationActual =
+    'Validation probe was rate-limited (HTTP 429). Input validation could not be verified during this run; rate limiting remains active.';
+} else if (validationProbe.ok) {
+  validationActual = `Unexpected status ${validationProbe.status} received when sending invalid input payload.`;
+} else {
+
 
   auditResults.push({
     id: 'SEC-005',
